@@ -5,6 +5,9 @@ hub:
       storageClassName: gp3
   authenticatePrometheus: false
   command: ["sh", "-c", "pip install boto3 && jupyterhub --config /usr/local/etc/jupyterhub/jupyterhub_config.py"]
+  extraConfig:
+    myConfig: |
+      ${indent(6, dandi_authenticator)}
   config:
     Authenticator:
       admin_users:

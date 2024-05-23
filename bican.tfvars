@@ -6,3 +6,4 @@ dandi_api_domain = "https://api.dandiarchive.org"
 admin_users = ["asmacdo", "kabilar", "dandibot", "satra", "yarikoptic"]
 profile_list_path = "bican_profiles.yaml"
 github_organization = "bican"
+use_dandi_api_auth = false

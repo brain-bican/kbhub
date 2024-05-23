@@ -116,3 +116,9 @@ variable "github_organization" {
   description = "Github organization to check for user membership"
   type = string
 }
+
+variable "use_dandi_api_auth" {
+  description = "Whether to query a DANDI API for authorization"
+  type = bool
+  default = true
+}
