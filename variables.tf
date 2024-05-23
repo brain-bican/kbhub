@@ -117,8 +117,8 @@ variable "github_organization" {
   type = string
 }
 
-variable "use_dandi_api_auth" {
+variable "auth_type" {
   description = "Whether to query a DANDI API for authorization"
-  type = bool
-  default = true
+  type = string
+  default = "dandi_api"
 }

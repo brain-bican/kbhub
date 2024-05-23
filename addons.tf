@@ -305,7 +305,7 @@ module "eks_data_addons" {
       dandi_authenticator         = templatefile("${path.module}/helm/jupyterhub/files/dandi_authenticator.py", {
         danditoken                  = var.danditoken
         dandi_api_domain            = var.dandi_api_domain
-        use_dandi_api_auth          = var.use_dandi_api_auth
+        auth_type                   = var.auth_type
       })
       profile_list                = templatefile("${path.module}/${var.profile_list_path}", {
         singleuser_image_repo       = var.singleuser_image_repo
