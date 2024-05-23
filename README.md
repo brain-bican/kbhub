@@ -6,8 +6,9 @@ Based on https://github.com/awslabs/data-on-eks/tree/main/ai-ml/jupyterhub
 ### Prerequisites
 
 This guide assumes that you have:
+ - terraform installed locally
  - a registered domain
- - an AWS Cert for the domain and subdomains
+ - an AWS Cert for the domain and subdomains (in the same region)
  - AWS IAM account
  - AWS CLI profile for the account (`aws configure --profile bican`)
 
@@ -47,7 +48,6 @@ This template is configuration for the jupyterhub helmchart [administrator guide
 The original [AWS Jupyterhub Example Blueprint docs](https://awslabs.github.io/data-on-eks/docs/blueprints/ai-ml/jupyterhub) may be helpful.
 
 
-### Installation
 
 Preflight checklist:
 
@@ -72,6 +72,8 @@ Cleanup requires the same variables and is run `./cleanup.sh`
 NOTE: Occasionally the kubernetes namespace fails to delete.
 
 WARNING: Sometimes AWS VPCs are left up due to an upstream terraform race condition, and must be deleted by hand (including hand-deleting each nested object)
+
+## TF local
 
 ### Update
 
