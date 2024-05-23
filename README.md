@@ -31,6 +31,43 @@ Create a variables file `$HUB_DEPLOYMENT_NAME.tfvars` (ie dandihub.tfvars)
  - dandi_api_domain: The domain that hosts the DANDI API with list of registered users
  - admin_users: List of adming github usernames (ie: ["github_username"])
  - region: Cloud vendor region (ie us-west-1)
+ - github_organization: If using github rather than DANDI auth
+ - auth_type: "github" or "dandi_api"
+ - profile_list_path: relative path to the profile list yaml file, see below
+
+### Profiles File
+
+Create a profiles file and name it to match `profile_list_path`.
+
+These are the Jupyterhub options for user-facing machines that run as a pod on the node.
+https://z2jh.jupyter.org/en/stable/jupyterhub/customizing/user-environment.html#using-multiple-profiles-to-let-users-select-their-environment
+
+Each profile can have multiple user-facing `profile_options` including `images`.
+
+Example:
+
+```yaml
+- display_name: "Tiny. Useful for many quick things"
+  description: "0.5 CPU / 1 GB"
+  profile_options:
+    image:
+      display_name: "Image"
+      choices:
+        standard:
+          display_name: "Standard"
+          default: true
+          kubespawner_override:
+            image: "${singleuser_image_repo}:${singleuser_image_tag}"
+  kubespawner_override:
+    image_pull_policy: Always
+    cpu_limit: 2
+    cpu_guarantee: 0.25
+    mem_limit: 2G
+    mem_guarantee: 0.5G
+    node_selector:
+      NodePool: default
+```
+
 
 ### Github Oauth
 
@@ -115,13 +152,6 @@ metadata:
   name: aws-auth
   namespace: kube-system
 ```
-
-### Adjusting Available "Server Options"
-
-These are the options for user-facing machines that run as a pod on the node and they are configured
-in `profileList` in `dandihub.yaml`
-
-Each profile can have multiple user-facing `profile_options` including `images`.
 
 ### Adjusting Available Nodes
 
